@@ -1,0 +1,51 @@
+
+
+.even{
+    background-color: steelblue;
+    color: white;
+   font-family: cursive;
+}
+.odd{
+    background-color: tomato;
+    color: white;
+    font-family: cursive;
+   
+}
+#option{
+    background-color: transparent;
+}
+tr{
+    font-size: 12px;
+}
+tr:hover{
+    background-color: greenyellow;
+    color: black;
+}
+th{
+    background-color: crimson;
+}
+#cancel{
+    background-color: rgb(204, 77, 102);
+    color: white;
+}
+#cancel:hover{
+    background-color: red;
+}
+#save{
+    background-color: greenyellow;
+color: white;
+}
+#save:hover{
+    background-color: green;
+}
+label{
+    background-color: greenyellow;
+    font-family: cursive;
+}
+input{
+    background-color: pink;
+    font-family: cursive;
+}
+#form{
+    background-color: aquamarine;
+}

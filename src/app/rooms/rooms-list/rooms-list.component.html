@@ -1,0 +1,100 @@
+
+<div class="container mt-4 text-center danger">
+    <h2 style="color: crimson;font-family:monospace;font-weight: bold;" class="mb-4">{{title}}</h2>
+
+  </div>
+<table class="table table-sm table-striped border" >
+    <tr>
+                     <th>Index</th>
+                    <th>Even/Odd</th>
+                    <th>Room Number</th>
+                    <th>room Type</th>
+                <th>Room Amenites</th>
+                    <th>Room Price</th>
+                    <th>photos</th>
+                    <th>Room checkin Time</th>
+                    <th>Room Checkout Time</th>
+                    <th>Rating</th>
+                    <th>Options</th>
+                </tr>
+                <tr *ngFor="let room of rooms ;let i =index ; let e=even ;let o = odd;" [ngClass]="e? 'even' :'odd'" >
+                    <td>{{ i }}</td>
+                    <td>{{e?'Even':'Odd'}}</td>
+                    <td>{{room.roomNumber}}</td>
+                    <td>{{room.roomType |uppercase}}</td>
+                    <td>{{room.amenities |titlecase}}</td>
+                    <td>{{room.price |currency : 'JD'}}</td>
+                    <td>{{room.photos}}</td>
+                    <td>{{room.checkinTime | date: 'MMM d, y, h:mm:ss a'}}</td>
+                    <td>{{room.checkoutTime | date :'MMM d, y, h:mm:ss a'}}</td>
+                    <td>{{room.rating}}</td>
+                    <td>
+                        <button id="option" class="btn btn-outline-primary" (click)="selectRoom(room)">
+                            select
+                        </button>|
+                        <button id="option" class="btn btn-outline-danger" (click)="deleteRoom(room.roomID)">
+                            Delete
+                        </button>|
+                        <button id="option" class="btn btn-outline-info" (click)="EditRoom(room.roomID,room)" >
+                            Edit
+                        </button>
+                    </td>
+                   
+                </tr>
+             
+   </table>
+<!-- Modal -->
+<div class="text-center border border-light p-5" *ngIf="isModalOpen" role="dialog" aria-labelledby="editRoomModalLabel" id="form">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h5 class="modal-title text-center">Edit Room</h5>
+            <button type="button" class="btn btn-outline-danger" (click)="cancelUpdate()">&times;</button>
+        </div>
+
+        <!-- Modal Body -->
+        <form (ngSubmit)="UpdateRoom($event)">
+            <div class="modal-body">    
+                <div class="form-group">
+                    <label for="roomNumber">Room Number</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.roomNumber" name="roomNumber" placeholder="Room Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomType">Room Type</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.roomType" name="roomType" placeholder="Room Type" required>
+                </div>
+                <div class="form-group">
+                    <label for="amenities">Amenities</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.amenities" name="amenities" placeholder="Room Amenities" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.price" name="price" placeholder="Room price" required>
+                </div>
+                <div class="form-group">
+                    <label for="photos">Photo</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.photos" name="photos" placeholder="Room photos" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkinTime">checkIn Time</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.checkinTime" name="checkinTime" type="datetime-local" placeholder="checkinTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkoutTime">Checkout Time</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.checkoutTime" name="checkoutTime" type="datetime-local" placeholder="checkoutTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <input type="text" class="form-control" [(ngModel)]="editingRoom.rating" name="rating" placeholder="rating" required>
+                </div>
+                <!-- Add other form fields here for editing room details -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button"  id="cancel" class="btn btn-outline-danger text-center" (click)="cancelUpdate()">Close</button>
+                <button type="submit" id="save" class="btn btn-outline-info">Update changes</button>
+            </div>
+        </form>
+    </div>
+</div>
